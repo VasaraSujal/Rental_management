@@ -1,171 +1,3 @@
-// import React, { useState, useEffect } from "react";
-
-// const slides = [
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/android-project-house-rental-management-app_znj5gz.png",
-//     title: "Rent Luxury Cars",
-//     subtitle: "Drive your dream car today",
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/9k_1_ohg5wm.png",
-//     title: "High-Tech Electronics",
-//     subtitle: "Get the latest gadgets on rent",
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/Z_fxnqqw.png",
-//     title: "Sports Gear",
-//     subtitle: "Everything you need for your game",
-//   },
-// ];
-
-
-// // const products = [
-// //   {
-// //     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.28_49d22fc5_vni3kf.jpg",
-// //     title: "Camouflage Oversized T-Shirt",
-// //   },
-// //   {
-// //     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.42_0878e935_rl1bzd.jpg",
-// //     title: "Slim Fit Beige Pants",
-// //   },
-// //   {
-// //     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-// //     title: "Beige Oversized T-Shirt",
-// //   },
-// // ];
-// const products = [
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.42_0878e935_rl1bzd.jpg",
-//     title: "Camouflage Oversized T-Shirt",
-//     description: "Comfortable casual wear for all seasons",
-//     price: 150,
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.28_49d22fc5_vni3kf.jpg",
-//     title: "Slim Fit Beige Pants",
-//     description: "Perfect fit with premium quality fabric",
-//     price: 200,
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-//     title: "Beige Oversized T-Shirt",
-//     description: "Trendy oversized design for a relaxed look",
-//     price: 180,
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-//     title: "Beige Oversized T-Shirt",
-//     description: "Trendy oversized design for a relaxed look",
-//     price: 180,
-//   },
-//   {
-//     img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-//     title: "Beige Oversized T-Shirt",
-//     description: "Trendy oversized design for a relaxed look",
-//     price: 180,
-//   },
-// ];
-
-
-// const HomePage = () => {
-//   const [current, setCurrent] = useState(0);
-
-//   // Auto slide effect
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-//     }, 3000);
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <div className="bg-[#F4F4F4] min-h-screen">
-//       {/* Hero Auto Slider */}
-//       <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
-//         {slides.map((slide, index) => (
-//           <div
-//             key={index}
-//             className={`absolute inset-0 transition-opacity duration-1000 ${
-//               index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-//             }`}
-//           >
-//             <img
-//               src={slide.img}
-//               alt={slide.title}
-//               className="w-full h-full object-cover"
-//             />
-//             {/* Overlay */}
-//             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white text-center p-4">
-//               <h1 className="text-3xl md:text-5xl font-bold">{slide.title}</h1>
-//               <p className="mt-2 text-lg">{slide.subtitle}</p>
-//             </div>
-//           </div>
-//         ))}
-
-//         {/* Dots Navigation */}
-//         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-//           {slides.map((_, index) => (
-//             <div
-//               key={index}
-//               onClick={() => setCurrent(index)}
-//               className={`w-3 h-3 rounded-full cursor-pointer transition ${
-//                 index === current ? "bg-white" : "bg-gray-400"
-//               }`}
-//             ></div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* Product Section */}
-// <section className="py-10 px-6 bg-white">
-//   {/* Section Header */}
-//   <div className="text-center mb-8">
-//     <h2 className="text-2xl font-semibold tracking-wide">New Arrivals</h2>
-//     <p className="text-gray-500">Fresh styles for your wardrobe</p>
-//   </div>
-
-//   {/* Product Grid */}
-//   <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 max-w-8xl mx-auto">
-//     {products.map((product, idx) => (
-//       <div
-//         key={idx}
-//         className="bg-white flex flex-col hover:scale-105 transition-transform duration-300 cursor-pointer rounded-lg shadow-md"
-//       >
-//         {/* Product Image */}
-//         <img
-//           src={product.img}
-//           alt={product.title}
-//           className="w-full h-[300px] object-cover rounded-t-lg"
-//         />
-
-//         {/* Product Info */}
-//         <div className="flex items-center justify-between p-4">
-//           {/* Left side: Title + Description */}
-//           <div>
-//             <h3 className="text-lg font-medium text-gray-800">{product.title}</h3>
-//             <p className="text-gray-500 text-sm">{product.description}</p>
-//           </div>
-
-//           {/* Right side: Price */}
-//           <p className="text-lg font-bold text-gray-800 whitespace-nowrap">
-//             ₹{product.price}/day
-//           </p>
-//         </div>
-//       </div>
-//     ))}
-//   </div>
-// </section>
-
-
-//     </div>
-//   );
-// };
-
-// export default HomePage;
-
-
-
-
 import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
@@ -377,17 +209,131 @@ const HomePage = () => {
       {/* Product Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-left mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             New Arrivals
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-left text-gray-600 max-w-2xl">
             Discover our latest collection of premium fashion pieces, carefully
             curated for the modern trendsetter
           </p>
         </div>
 
         {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto mb-15">
+          {products.map((product, idx) => (
+            <div
+              key={idx}
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
+            >
+              {/* Product Image */}
+              <div className="relative overflow-hidden">
+                <img
+                  src={product.img}
+                  alt={product.title}
+                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                    View Details
+                  </button>
+                </div>
+              </div>
+
+              {/* Product Info */}
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
+                  {product.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {product.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-gray-900">
+                    ₹{product.price}
+                    <span className="text-sm font-normal text-gray-500">
+                      /day
+                    </span>
+                  </span>
+                  <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    Rent Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-left mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Trending Now
+          </h2>
+          <p className="text-xl text-left text-gray-600 max-w-2xl">
+            Explore the hottest fashion items that everyone is talking about
+            this season
+          </p>
+        </div>
+
+        {/* Trending Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto">
+          {products.map((product, idx) => (
+            <div
+              key={idx}
+              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
+            >
+              {/* Product Image */}
+              <div className="relative overflow-hidden">
+                <img
+                  src={product.img}
+                  alt={product.title}
+                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                    View Details
+                  </button>
+                </div>
+              </div>
+
+              {/* Product Info */}
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
+                  {product.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {product.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-gray-900">
+                    ₹{product.price}
+                    <span className="text-sm font-normal text-gray-500">
+                      /day
+                    </span>
+                  </span>
+                  <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    Rent Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-left mb-16 mt-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Top Rented
+          </h2>
+          <p className="text-xl text-left text-gray-600 max-w-2xl">
+            Check out our most popular rental picks, loved by trendsetters like
+            you
+          </p>
+        </div>
+
+        {/* Top Rented Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto">
           {products.map((product, idx) => (
             <div
@@ -688,59 +634,12 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-
-          <div className="mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose <span className="text-gray-700">RentalPro</span>?
-            </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We're more than a rental service – we're your trusted partner in
-              creating extraordinary experiences with professional-grade
-              equipment and unparalleled support.
-            </p>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {whyChooseUsData.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <div
-                  key={index}
-                  className="group bg-white p-8 lg:p-10 rounded-3xl border border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-                >
-                  {/* Icon */}
-                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-gray-900 group-hover:scale-110 transition-all duration-300">
-                    <IconComponent className="w-8 h-8 text-gray-700 group-hover:text-white transition-colors duration-300" />
-                  </div>
-
-                  <h4 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                    {item.description}
-                  </p>
-
-                  {/* Hover indicator */}
-                  <div className="mt-6 w-12 h-1 bg-gray-200 rounded-full mx-auto group-hover:bg-gray-900 group-hover:w-16 transition-all duration-300"></div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Call to action */}
-          <div className="mt-16">
-            <button className="bg-gray-900 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg">
-              Discover Our Products →
-            </button>
-          </div>
         </div>
       </section>
       {/* Customer Testimonials Section */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-16">
-
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               What Our Customers Say
             </h2>

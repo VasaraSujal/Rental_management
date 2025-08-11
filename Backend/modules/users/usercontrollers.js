@@ -115,5 +115,45 @@ const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+const changePassword = async (req, res) => {
+  try {
+    const db = getDB();
+    const { email, currentPassword, newPassword } = req.body;
 
-module.exports = { addUser, userprofile , updateUserProfile};
+    // Validate input
+    if (!email || !currentPassword || !newPassword) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Find user
+    const user = await db.collection("users").findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check old password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Current password is incorrect" });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password
+    await db.collection("users").updateOne(
+      { email },
+      { $set: { password: hashedPassword, updatedAt: new Date() } }
+    );
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { addUser, userprofile, updateUserProfile, changePassword };
+
+
+module.exports = { addUser, userprofile , updateUserProfile , changePassword};

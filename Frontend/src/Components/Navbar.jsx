@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ShoppingBag, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import { logout } from "../Pages/Redux/authslice";
+import { logout } from "../Pages/Redux/authslice";
 import LoginPopup from "../Components/Login_signup/Login";
 import SignUpPopup from "../Components/Login_signup/Signup";
 

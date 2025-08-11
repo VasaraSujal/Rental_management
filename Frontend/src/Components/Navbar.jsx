@@ -90,9 +90,9 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <div className="flex items-center gap-5 relative">
-          <button className="hover:text-gray-500 transition flex items-center gap-1">
+          {/* <button className="hover:text-gray-500 transition flex items-center gap-1">
             <span className="text-sm tracking-wide">Cart</span>
-          </button>
+          </button> */}
           <button className="relative bg-white p-2 rounded-full shadow hover:shadow-md transition">
             <ShoppingBag className="w-5 h-5 text-black" />
           </button>
@@ -114,7 +114,7 @@ const Navbar = () => {
               </button>
 
               {profileOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden z-100">
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"

@@ -9,7 +9,8 @@ import CuHome from "./Pages/Customer/CuHome";
 import Footer from "./Components/Footer";
 import Products from "./Pages/Customer/Product";
 
-import Contect from './Pages/Customer/Contact'
+import Contact from './Pages/Customer/Contact'
+import UserProfileSection from "./Pages/Customer/UserProfileSection";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<CuHome />} />
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile/:email" element={<UserProfileSection />} />
         </Routes>
 
         {/* Footer is always visible */}

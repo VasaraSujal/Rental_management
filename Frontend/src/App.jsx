@@ -1,25 +1,34 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./Pages/Redux/authstore";
+import { store } from "./Pages/Redux/authstore";  // adjust path if needed
+
 import Navbar from "./Components/Navbar";
-import Home from "./Pages/Customer/CuHome";
+import CuHome from "./Pages/Customer/CuHome";
+import Footer from "./Components/Footer";
 import Products from "./Pages/Customer/Product";
-// import Contact from "./Pages/Customer";
-// import RentalProducts from "./Pages/RentalProducts";
+import Contact from "./Pages/Customer/Contact";
 
 function App() {
+  const [loginOpen, setLoginOpen] = useState(false);
+
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
+        {/* Navbar is always visible */}
         <Navbar />
+
+        {/* Routes */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<CuHome />} />
           <Route path="/products" element={<Products />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
-          {/* <Route path="/rental-products" element={<RentalProducts />} /> */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
-      </Router>
+
+        {/* Footer is always visible */}
+        <Footer />
+      </BrowserRouter>
     </Provider>
   );
 }

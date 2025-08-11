@@ -1,7 +1,6 @@
 const app = require('./app');
 const { connectToMongoDB } = require('./config/db');
-require('dotenv').config({ path: './auth.env' });
-
+require("dotenv").config({ path: "./auth.env" });
 const PORT = process.env.PORT || 5500;
 
 connectToMongoDB().then(() => {

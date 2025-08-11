@@ -213,6 +213,7 @@ const HomePage = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             New Arrivals
           </h2>
+          <hr className="border-t-2 border-gray-500 mb-4 w-80" />
           <p className="text-xl text-left text-gray-600 max-w-2xl">
             Discover our latest collection of premium fashion pieces, carefully
             curated for the modern trendsetter
@@ -270,6 +271,7 @@ const HomePage = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Trending Now
           </h2>
+          <hr className="border-t-2 border-gray-500 mb-4 w-88" />
           <p className="text-xl text-left text-gray-600 max-w-2xl">
             Explore the hottest fashion items that everyone is talking about
             this season
@@ -327,6 +329,7 @@ const HomePage = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Top Rented
           </h2>
+          <hr className="border-t-2 border-gray-500 mb-4 w-71" />
           <p className="text-xl text-left text-gray-600 max-w-2xl">
             Check out our most popular rental picks, loved by trendsetters like
             you

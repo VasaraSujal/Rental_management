@@ -54,21 +54,43 @@ const Navbar = () => {
               }`}
             >
               <ul className="flex items-center gap-6 whitespace-nowrap pl-2">
-                <li><Link to="/products" className="hover:text-blue-600">Product</Link></li>
-                <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
-                <li><Link to="/rental-products" className="hover:text-blue-600">Rental Product</Link></li>
+                <li>
+                  <Link to="/products" className="hover:text-blue-600">
+                    Product
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-blue-600">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/rental-products" className="hover:text-blue-600">
+                    Rental Product
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
 
-
-                    {/* Desktop Menu */}
-                    <ul className="hidden md:flex items-center gap-6">
-                        <li><Link to="/products" className="hover:text-blue-600">Product</Link></li>
-                        <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
-                        <li><Link to="/rental-products" className="hover:text-blue-600">Rental Product</Link></li>
-                    </ul>
-
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex items-center gap-6">
+            <li>
+              <Link to="/products" className="hover:text-blue-600">
+                Product
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-blue-600">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/rental-products" className="hover:text-blue-600">
+                Rental Product
+              </Link>
+            </li>
+          </ul>
         </div>
 
         {/* Search Bar (desktop) */}

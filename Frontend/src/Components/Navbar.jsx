@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import { ShoppingBag, User, Search } from "lucide-react";
+import { ShoppingBag, Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../Pages/Redux/authslice";
 import LoginPopup from "../Components/Login_signup/Login";
 import SignUpPopup from "../Components/Login_signup/Signup";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Popup states
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
+  // Profile dropdown
+  const [profileOpen, setProfileOpen] = useState(false);
+
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleSearch = () => setSearchOpen(!searchOpen);
-
-  const handleLogin = (email, password) => {
-    if (email && password) {
-      setIsLoggedIn(true);
-      setShowLogin(false);
-    }
-  };
-
-  const handleSignUp = (data) => {
-    console.log("Sign up data:", data);
-    setShowSignUp(false);
-    setShowLogin(true); // After signup, show login popup
-  };
 
   return (
     <>
@@ -95,7 +89,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Icons */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 relative">
           <button className="hover:text-gray-500 transition flex items-center gap-1">
             <span className="text-sm tracking-wide">Cart</span>
           </button>
@@ -103,7 +97,7 @@ const Navbar = () => {
             <ShoppingBag className="w-5 h-5 text-black" />
           </button>
 
-          {!isLoggedIn ? (
+          {!user ? (
             <button
               className="hover:text-gray-500 transition"
               onClick={() => setShowLogin(true)}
@@ -111,9 +105,35 @@ const Navbar = () => {
               Login
             </button>
           ) : (
-            <button className="hover:text-gray-500 transition">
-              <User className="w-5 h-5" />
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setProfileOpen((prev) => !prev)}
+                className="bg-blue-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center"
+              >
+                {user.username.charAt(0).toUpperCase()}
+              </button>
+
+              {profileOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden">
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setProfileOpen(false)}
+                  >
+                    See Profile
+                  </Link>
+                  <button
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    onClick={() => {
+                      dispatch(logout());
+                      setProfileOpen(false);
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           )}
         </div>
 
@@ -138,7 +158,6 @@ const Navbar = () => {
       <LoginPopup
         isOpen={showLogin}
         onClose={() => setShowLogin(false)}
-        onLogin={handleLogin}
         onSwitchToSignUp={() => {
           setShowLogin(false);
           setShowSignUp(true);
@@ -149,7 +168,6 @@ const Navbar = () => {
       <SignUpPopup
         isOpen={showSignUp}
         onClose={() => setShowSignUp(false)}
-        onSignUp={handleSignUp}
         onSwitchToLogin={() => {
           setShowSignUp(false);
           setShowLogin(true);

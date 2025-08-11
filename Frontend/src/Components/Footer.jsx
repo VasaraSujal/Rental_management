@@ -44,9 +44,9 @@ export default function Footer() {
         <div>
           <h3 className="text-md font-semibold text-gray-900">Contact</h3>
           <ul className="mt-3 space-y-3 text-sm">
-            <li className="flex items-center gap-2"><Phone size={16} /> +1 234 567 890</li>
-            <li className="flex items-center gap-2"><Mail size={16} /> support@kinghub.com</li>
-            <li className="flex items-center gap-2"><MapPin size={16} /> 123 Rental Street, City, Country</li>
+            <li className="flex items-center gap-2"><Phone size={16} /> +91 98765 43210</li>
+            <li className="flex items-center gap-2"><Mail size={16} /> jatinrajwani@gmail.com</li>
+            <li className="flex items-center gap-2"><MapPin size={16} /> Rai University, Ahmedabad, Gujarat, India</li>
           </ul>
         </div>
 

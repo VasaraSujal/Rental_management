@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
@@ -162,6 +163,8 @@ const HomePage = () => {
       : testimonialIndex + 1;
   };
 
+  const navigate=useNavigate();
+
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Auto Slider */}
@@ -189,8 +192,8 @@ const HomePage = () => {
                 <p className="text-xl md:text-2xl mb-8 font-light opacity-90">
                   {slide.subtitle}
                 </p>
-                <button className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg">
-                  Explore Now →
+                <button onClick={()=>navigate('/products')} className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg">
+                  View Products →
                 </button>
               </div>
             </div>
@@ -218,7 +221,7 @@ const HomePage = () => {
   {/* Section Header */}
   <div className="text-center mb-10">
     <h2 className="text-3xl md:text-4xl font-semibold tracking-wide text-gray-900 mb-2">
-      Top rated Products
+      Top rated Products in Week
     </h2>
     <p className="text-gray-500 max-w-2xl mx-auto">
       {/* Discover our latest collection of premium fashion pieces, carefully curated for the modern trendsetter. */}

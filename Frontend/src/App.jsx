@@ -8,7 +8,9 @@ import Navbar from "./Components/Navbar";
 import CuHome from "./Pages/Customer/CuHome";
 import Footer from "./Components/Footer";
 import Products from "./Pages/Customer/Product";
-import Contact from "./Pages/Customer/Contact";
+
+import Contect from './Pages/Customer/Contact'
+
 
 function App() {
   const [loginOpen, setLoginOpen] = useState(false);
@@ -18,6 +20,7 @@ function App() {
       <BrowserRouter>
         {/* Navbar is always visible */}
         <Navbar />
+
 
         {/* Routes */}
         <Routes>

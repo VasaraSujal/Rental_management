@@ -52,7 +52,7 @@ const SignUpPopup = ({ isOpen, onClose, onUserAdded }) => {
       };
 
       const response = await axios.post(
-        "http://localhost:5500/api/add",
+        "https://rental-management-20jo.onrender.com/api/add",
         payload
       );
 

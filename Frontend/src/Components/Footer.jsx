@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Phone, Mail, MapPin } from "lucide-react"
 export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-600">
-      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-300">
+    <div className="w-full mx-auto px-20 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-300">
         
         {/* Company Info */}
         <div>
@@ -53,7 +53,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="py-4 text-center text-xs text-gray-500">
+      <div className="py-4 text-xs text-right px-10 text-gray-500">
         © 2025 RentPro. All rights reserved.
       </div>
     </footer>

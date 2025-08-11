@@ -1,23 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './Components/Navbar'
-import CuHome from './Pages/Customer/CuHome'
-import Footer from './Components/Footer'
+import { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import CuHome from "./Pages/Customer/CuHome";
+import Footer from "./Components/Footer";
+import Products from "./Pages/Customer/Product";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+    const [loginOpen, setLoginOpen] = useState(false);
   return (
-    <>
+    <BrowserRouter>
+      {/* Navbar is always visible */}
+      <Navbar />
 
-    <Navbar/>
-    <CuHome/>
-    <Footer/>
-    </>
-      
-  )
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<CuHome />} />
+        <Route path="/products" element={<Products />} />
+
+      </Routes>
+
+      {/* Footer is always visible */}
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

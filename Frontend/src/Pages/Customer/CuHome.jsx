@@ -10,54 +10,61 @@ import {
 
 const slides = [
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/android-project-house-rental-management-app_znj5gz.png",
-    title: "Rent Luxury Cars",
-    subtitle: "Drive your dream car today",
+    img: "https://plus.unsplash.com/premium_photo-1679079456083-9f288e224e96?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Rent Electronics",
+    subtitle: "Rent best electronics",
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/9k_1_ohg5wm.png",
-    title: "High-Tech Electronics",
-    subtitle: "Get the latest gadgets on rent",
+    img: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Rent the best Mountain Bikes",
+    subtitle: "Get the Best Mountain Bikes",
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/Z_fxnqqw.png",
-    title: "Sports Gear",
-    subtitle: "Everything you need for your game",
+    img: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Gym Equipments",
+    subtitle: "Get the best gym equipments",
   },
 ];
 
 const products = [
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.42_0878e935_rl1bzd.jpg",
-    title: "Camouflage Oversized T-Shirt",
-    description: "Comfortable casual wear for all seasons",
-    price: 150,
+    img: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "DSLR Camera",
+    description: "High-resolution DSLR camera suitable for photography and videography projects.",
+    price: 1200, // price per day in ₹
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894798/WhatsApp_Image_2025-08-11_at_12.15.28_49d22fc5_vni3kf.jpg",
-    title: "Slim Fit Beige Pants",
-    description: "Perfect fit with premium quality fabric",
-    price: 200,
+    img: "https://images.unsplash.com/photo-1637656358738-3fcfacb63559?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Projector",
+    description: "Portable HD projector perfect for presentations, movie nights, or events.",
+    price: 800,
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-    title: "Beige Oversized T-Shirt",
-    description: "Trendy oversized design for a relaxed look",
-    price: 180,
+    img: "https://plus.unsplash.com/premium_photo-1721460167354-b55c73c05331?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZHJpbGwlMjBtYWNoaW5lfGVufDB8fDB8fHww",
+    title: "Electric Drill Machine",
+    description: "Powerful electric drill for DIY projects and professional use.",
+    price: 350,
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-    title: "Beige Oversized T-Shirt",
-    description: "Trendy oversized design for a relaxed look",
-    price: 180,
+    img: "https://images.unsplash.com/photo-1612241143917-d05c85c43751?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNwZWFrZXJzfGVufDB8fDB8fHww",
+    title: "Portable Speaker",
+    description: "Bluetooth-enabled portable speaker with excellent sound quality for parties or events.",
+    price: 400,
   },
   {
-    img: "https://res.cloudinary.com/dkombksnu/image/upload/v1754894799/WhatsApp_Image_2025-08-11_at_12.15.19_86fd1a2b_jfh9fi.jpg",
-    title: "Beige Oversized T-Shirt",
-    description: "Trendy oversized design for a relaxed look",
-    price: 180,
+    img: "https://images.unsplash.com/photo-1633805159007-8e198bbcc931?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Camping Tent",
+    description: "Waterproof camping tent that accommodates up to 4 people. Ideal for outdoor adventures.",
+    price: 1500,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1534150034764-046bf225d3fa?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Mountain Bike",
+    description: "Durable mountain bike suitable for rugged trails and city rides.",
+    price: 1000,
   },
 ];
+
 
 const whyChooseUsData = [
   {
@@ -207,182 +214,102 @@ const HomePage = () => {
       </section>
 
       {/* Product Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
-        {/* Section Header */}
-        <div className="text-left mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            New Arrivals
-          </h2>
-          <hr className="border-t-2 border-gray-500 mb-4 w-80" />
-          <p className="text-xl text-left text-gray-600 max-w-2xl">
-            Discover our latest collection of premium fashion pieces, carefully
-            curated for the modern trendsetter
-          </p>
+<section className="py-12 px-6 bg-gradient-to-b from-gray-50 to-white max-w-7xl mx-auto">
+  {/* Section Header */}
+  <div className="text-center mb-10">
+    <h2 className="text-3xl md:text-4xl font-semibold tracking-wide text-gray-900 mb-2">
+      Top rated Products
+    </h2>
+    <p className="text-gray-500 max-w-2xl mx-auto">
+      {/* Discover our latest collection of premium fashion pieces, carefully curated for the modern trendsetter. */}
+    </p>
+  </div>
+
+  {/* Products Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    {products.map((product, idx) => (
+      <div
+        key={idx}
+        className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+      >
+        <img
+          src={product.img}
+          alt={product.title}
+          className="h-48 w-full object-cover"
+        />
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
+          {/* Optional category/tag here if available */}
+          <p className="text-sm text-gray-600 flex-1 mb-2">{product.description}</p>
+          <p className="text-sm text-gray-700 mb-3">Available: {product.available || "N/A"}</p>
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold">₹{product.price}</span>
+            <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition text-sm font-semibold">
+              Rent Now
+            </button>
+          </div>
         </div>
+      </div>
+    ))}
+  </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto mb-15">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
-            >
-              {/* Product Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={product.img}
-                  alt={product.title}
-                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                    View Details
-                  </button>
-                </div>
-              </div>
 
-              {/* Product Info */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
-                  {product.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900">
-                    ₹{product.price}
-                    <span className="text-sm font-normal text-gray-500">
-                      /day
-                    </span>
-                  </span>
-                  <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
-                    Rent Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    {products.map((product, idx) => (
+      <div
+        key={idx}
+        className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+      >
+        <img
+          src={product.img}
+          alt={product.title}
+          className="h-48 w-full object-cover"
+        />
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
+          <p className="text-sm text-gray-600 flex-1 mb-2">{product.description}</p>
+          <p className="text-sm text-gray-700 mb-3">Available: {product.available || "N/A"}</p>
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold">₹{product.price}</span>
+            <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition text-sm font-semibold">
+              Rent Now
+            </button>
+          </div>
         </div>
+      </div>
+    ))}
+  </div>
 
-        <div className="text-left mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Trending Now
-          </h2>
-          <hr className="border-t-2 border-gray-500 mb-4 w-88" />
-          <p className="text-xl text-left text-gray-600 max-w-2xl">
-            Explore the hottest fashion items that everyone is talking about
-            this season
-          </p>
+  {/* Top Rented */}
+
+  {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {products.map((product, idx) => (
+      <div
+        key={idx}
+        className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+      >
+        <img
+          src={product.img}
+          alt={product.title}
+          className="h-48 w-full object-cover"
+        />
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
+          <p className="text-sm text-gray-600 flex-1 mb-2">{product.description}</p>
+          <p className="text-sm text-gray-700 mb-3">Available: {product.available || "N/A"}</p>
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold">₹{product.price}</span>
+            <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition text-sm font-semibold">
+              Rent Now
+            </button>
+          </div>
         </div>
+      </div>
+    ))}
+  </div> */}
+</section>
 
-        {/* Trending Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
-            >
-              {/* Product Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={product.img}
-                  alt={product.title}
-                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                    View Details
-                  </button>
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
-                  {product.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900">
-                    ₹{product.price}
-                    <span className="text-sm font-normal text-gray-500">
-                      /day
-                    </span>
-                  </span>
-                  <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
-                    Rent Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-left mb-16 mt-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Top Rented
-          </h2>
-          <hr className="border-t-2 border-gray-500 mb-4 w-71" />
-          <p className="text-xl text-left text-gray-600 max-w-2xl">
-            Check out our most popular rental picks, loved by trendsetters like
-            you
-          </p>
-        </div>
-
-        {/* Top Rented Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-8xl mx-auto">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
-            >
-              {/* Product Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={product.img}
-                  alt={product.title}
-                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                    View Details
-                  </button>
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
-                  {product.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900">
-                    ₹{product.price}
-                    <span className="text-sm font-normal text-gray-500">
-                      /day
-                    </span>
-                  </span>
-                  <button className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
-                    Rent Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Why Choose Us Section */}
       <section className="py-20 px-6 bg-white relative overflow-hidden">

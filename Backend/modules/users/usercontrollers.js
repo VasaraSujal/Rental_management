@@ -94,5 +94,26 @@ const userprofile  = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+const updateUserProfile = async (req, res) => {
+  try {
+    const db = getDB();
+    const email = req.params.email;
+    const updates = req.body;
 
-module.exports = { addUser, userprofile };
+    const result = await db.collection('users').updateOne(
+      { email },
+      { $set: { ...updates, updatedAt: new Date() } }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+module.exports = { addUser, userprofile , updateUserProfile};

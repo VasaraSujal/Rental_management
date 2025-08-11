@@ -1,29 +1,38 @@
 import React, { useState } from "react";
 import { ShoppingBag, User, Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import LoginPopup from "../Components/Login_signup/Login"; // we'll create this below
+import LoginPopup from "../Components/Login_signup/Login";
+import SignUpPopup from "../Components/Login_signup/Signup";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // login state
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Popup states
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleSearch = () => setSearchOpen(!searchOpen);
 
   const handleLogin = (email, password) => {
-    // You can replace this with API authentication later
     if (email && password) {
       setIsLoggedIn(true);
-      setShowLoginPopup(false);
+      setShowLogin(false);
     }
+  };
+
+  const handleSignUp = (data) => {
+    console.log("Sign up data:", data);
+    setShowSignUp(false);
+    setShowLogin(true); // After signup, show login popup
   };
 
   return (
     <>
       <nav className="w-full bg-white text-black flex items-center justify-between px-4 py-2 shadow relative">
-        {/* Left Section - RM logo + options */}
+        {/* Left Section */}
         <div className="flex items-center gap-8">
           <Link to="/" className="text-lg font-bold hidden md:block">
             RM
@@ -94,11 +103,10 @@ const Navbar = () => {
             <ShoppingBag className="w-5 h-5 text-black" />
           </button>
 
-          {/* Show Login button if not logged in, else Profile icon */}
           {!isLoggedIn ? (
             <button
               className="hover:text-gray-500 transition"
-              onClick={() => setShowLoginPopup(true)}
+              onClick={() => setShowLogin(true)}
             >
               Login
             </button>
@@ -128,9 +136,24 @@ const Navbar = () => {
 
       {/* Login Popup */}
       <LoginPopup
-        isOpen={showLoginPopup}
-        onClose={() => setShowLoginPopup(false)}
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
         onLogin={handleLogin}
+        onSwitchToSignUp={() => {
+          setShowLogin(false);
+          setShowSignUp(true);
+        }}
+      />
+
+      {/* Signup Popup */}
+      <SignUpPopup
+        isOpen={showSignUp}
+        onClose={() => setShowSignUp(false)}
+        onSignUp={handleSignUp}
+        onSwitchToLogin={() => {
+          setShowSignUp(false);
+          setShowLogin(true);
+        }}
       />
     </>
   );

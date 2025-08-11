@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LoginPopup = ({ isOpen, onClose, onLogin }) => {
+const LoginPopup = ({ isOpen, onClose, onLogin, onSwitchToSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +15,7 @@ const LoginPopup = ({ isOpen, onClose, onLogin }) => {
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
       {/* Main Popup */}
       <div className="bg-white/90 backdrop-blur-md rounded-lg shadow-lg w-full max-w-4xl flex overflow-hidden relative">
-        
+
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -26,7 +26,8 @@ const LoginPopup = ({ isOpen, onClose, onLogin }) => {
 
         {/* Left - Form */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
+          <h2 className="text-3xl font-bold mb-3 text-center">Login</h2>
+          <h3 className="text-1xl font-medium mb-6 text-center">welcome back again</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
@@ -53,16 +54,21 @@ const LoginPopup = ({ isOpen, onClose, onLogin }) => {
           </form>
           <p className="text-sm text-center mt-4 text-gray-500">
             Don’t have an account?{" "}
-            <span className="text-blue-600 cursor-pointer hover:underline">Sign Up</span>
+            <span
+              className="text-blue-600 cursor-pointer hover:underline"
+              onClick={onSwitchToSignUp}
+            >
+              Sign Up
+            </span>
           </p>
         </div>
 
         {/* Right - Image */}
-        <div className="hidden md:flex w-1/2 items-center justify-center bg-gray-50 py-10">
+        <div className="hidden md:flex w-1/2 items-center justify-center bg-gray-50 py-12">
           <img
             src="https://res.cloudinary.com/dzsvjyg2c/image/upload/undraw_access-account_aydp_wgiwhj.svg"
             alt="Login Illustration"
-            className="w-4/5 h-auto" // Reduced from w-4/5 to w-3/5
+            className="w-4/5 h-auto"
           />
         </div>
       </div>

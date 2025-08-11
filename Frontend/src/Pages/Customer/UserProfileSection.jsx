@@ -600,6 +600,9 @@ import {
   XCircle, AlertCircle
 } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+
 
 const UserProfileSection = () => {
   const { user } = useSelector((state) => state.auth); // from Redux auth slice
@@ -689,21 +692,22 @@ const UserProfileSection = () => {
     fetchProfile();
   }, [email]);
 
-  const handleSave = async () => {
-    setIsEditing(false);
-    try {
-      const res = await fetch(`https://rental-management-20jo.onrender.com/api/update/${email}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-      });
-      if (!res.ok) throw new Error("Update failed");
-      alert("Profile updated successfully!");
-    } catch (error) {
-      console.error(error);
-      alert("Error updating profile");
-    }
-  };
+const handleSave = async () => {
+  setIsEditing(false);
+  try {
+    const res = await fetch(`https://rental-management-20jo.onrender.com/api/profile/${email}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData)
+    });
+    if (!res.ok) throw new Error("Update failed");
+
+    toast.success("Profile updated successfully!");
+  } catch (error) {
+    console.error(error);
+    toast.error("Error updating profile");
+  }
+};
 
   const menuItems = [
     { id: 'personal-info', label: 'Personal Info', icon: User, color: 'text-blue-600' },
@@ -1214,6 +1218,7 @@ const UserProfileSection = () => {
         </div>
         <div className="lg:col-span-3">{renderContent()}</div>
       </div>
+            <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );
 };

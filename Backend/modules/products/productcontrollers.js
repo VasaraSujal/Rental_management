@@ -137,4 +137,79 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-module.exports = { addproduct, producttransaction, getAllProducts };
+const addincart = async (req, res) => {
+  const { userId, productId, quantity = 1, name, price, category, images } = req.body;
+
+  if (!userId || !productId) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    const db = getDB();
+    const userObjectId = new ObjectId(userId);
+    const productObjectId = new ObjectId(productId);
+
+    // Find existing cart for the user
+    const cart = await db.collection('carts').findOne({ userId: userObjectId });
+
+    if (!cart) {
+      // Create new cart for user with one product item
+      const newCart = {
+        userId: userObjectId,
+        items: [
+          {
+            productId: productObjectId,
+            quantity,
+            name,
+            price,
+            category,
+            images,
+            addedAt: new Date()
+          }
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      const result = await db.collection('carts').insertOne(newCart);
+      return res.status(201).json({
+        message: 'Product added to new cart successfully',
+        cartId: result.insertedId,
+      });
+    } else {
+      // Cart exists, check if product already in items
+      const existingItemIndex = cart.items.findIndex(item =>
+        item.productId.equals(productObjectId)
+      );
+
+      if (existingItemIndex > -1) {
+        // Product exists, update quantity
+        cart.items[existingItemIndex].quantity += quantity;
+        cart.items[existingItemIndex].addedAt = new Date();
+      } else {
+        // Add new product to items
+        cart.items.push({
+          productId: productObjectId,
+          quantity,
+          name,
+          price,
+          category,
+          images,
+          addedAt: new Date()
+        });
+      }
+
+      // Update cart document
+      await db.collection('carts').updateOne(
+        { userId: userObjectId },
+        { $set: { items: cart.items, updatedAt: new Date() } }
+      );
+
+      return res.status(200).json({ message: 'Cart updated successfully' });
+    }
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+module.exports = { addproduct, producttransaction, getAllProducts, addincart };

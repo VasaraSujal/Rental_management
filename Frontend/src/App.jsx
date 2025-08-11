@@ -11,6 +11,7 @@ import Products from "./Pages/Customer/Product";
 
 import Contact from './Pages/Customer/Contact'
 import UserProfileSection from "./Pages/Customer/UserProfileSection";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         {/* Footer is always visible */}
         <Footer />
       </BrowserRouter>
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </Provider>
   );
 }

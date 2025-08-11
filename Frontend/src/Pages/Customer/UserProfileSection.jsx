@@ -642,7 +642,7 @@ const UserProfileSection = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5500/api/change-password", {
+      const res = await fetch("https://rental-management-20jo.onrender.com/api/change-password", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -668,7 +668,7 @@ const UserProfileSection = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`http://localhost:5500/api/profile/${email}`);
+        const res = await fetch(`https://rental-management-20jo.onrender.com/api/profile/${email}`);
         if (!res.ok) throw new Error("Failed to fetch profile");
         const data = await res.json();
 
@@ -692,7 +692,7 @@ const UserProfileSection = () => {
   const handleSave = async () => {
     setIsEditing(false);
     try {
-      const res = await fetch(`http://localhost:5500/api/update/${email}`, {
+      const res = await fetch(`https://rental-management-20jo.onrender.com/api/update/${email}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData)

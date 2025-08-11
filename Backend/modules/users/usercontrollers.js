@@ -11,18 +11,19 @@ const addUser = async (req, res) => {
       location,
       mobile,
       profilePhoto,
-      isPublic,
       role,
-      skills = []
+      bankDetails,
+      propertiesRented
     } = req.body;
 
     // Basic validation
-    if (!username || !email || !password || !location || !mobile) {
+    if (!username || !email || !password || !location || !mobile || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    if (!Array.isArray(skills) || !skills.every(skill => typeof skill === 'string')) {
-      return res.status(400).json({ message: 'Skills must be an array of strings' });
+    // Validate bank details if provided
+    if (bankDetails && typeof bankDetails !== 'object') {
+      return res.status(400).json({ message: 'Bank details must be an object' });
     }
 
     // Check for duplicate email or username
@@ -49,11 +50,16 @@ const addUser = async (req, res) => {
       location,
       mobile,
       profilePhoto: profilePhoto || '',
-      isPublic: typeof isPublic === 'boolean' ? isPublic : true,
-      role: role || 'user',
-      createdAt: istNow
+      role: role || 'customer',
+      bankDetails: bankDetails || {},
+      propertiesRented: propertiesRented || [],
+      status: 'active',
+      createdAt: istNow,
+      updatedAt: istNow,
+      lastLogin: null
     };
 
+    // Insert into DB
     const result = await db.collection('users').insertOne(newUser);
 
     res.status(201).json({
@@ -66,5 +72,27 @@ const addUser = async (req, res) => {
   }
 };
 
+const userprofile  = async (req, res) => {
+  try {
+    const db = getDB();
+    const { email } = req.params;
 
-module.exports = { addUser,getprofile };
+    // Validate email format
+    if (!email || !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    // Fetch user profile
+    const user = await db.collection('users').findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+module.exports = { addUser, userprofile };

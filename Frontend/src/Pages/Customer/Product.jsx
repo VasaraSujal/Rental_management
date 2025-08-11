@@ -146,10 +146,11 @@
 
 // export default Products;
 
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import HashLoader from "react-spinners/HashLoader";
+import { toast } from "react-toastify";
 
 const categories = [
   "All",
@@ -169,15 +170,18 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState(50000);
   const [searchTerm, setSearchTerm] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch products from backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5500/api/products");
+        const res = await axios.get("https://rental-management-20jo.onrender.com/api/products");
         setProducts(res.data);
       } catch (error) {
         console.error("Error fetching products:", error);
+        toast.error("Failed to load products!");
       } finally {
         setLoading(false);
       }
@@ -185,32 +189,10 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  // Add to Cart Handler
+  // Handle Add to Cart
   const handleAddToCart = async (product) => {
     if (!user) {
-      alert("Please login first to add products to cart.");
-      return;
-    }
-
-    // Validate required fields
-    if (!user.email) {
-      alert("Email is missing!");
-      return;
-    }
-    if (!product._id) {
-      alert("Product ID is missing!");
-      return;
-    }
-    if (!product.name) {
-      alert("Product name is missing!");
-      return;
-    }
-    if (!product.category) {
-      alert("Product category is missing!");
-      return;
-    }
-    if (!(product.price || product.pricepermonth)) {
-      alert("Product price is missing!");
+      toast.warn("Please login first to add products to cart.");
       return;
     }
 
@@ -225,19 +207,38 @@ const Products = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5500/api/addincart", cartData);
-      console.log("Server response:", response.data);
-      alert(`Added ${product.name} to cart!`);
+      await axios.post("https://rental-management-20jo.onrender.com/api/addincart", cartData);
+      toast.success(`${product.name} added to cart!`);
     } catch (error) {
       console.error("Add to cart failed:", error.response?.data || error);
-      alert(`Failed to add product to cart: ${error.response?.data?.message || error.message}`);
+      toast.error(`Failed to add product: ${error.response?.data?.message || error.message}`);
     }
+  };
+
+  // Handle search input & suggestions
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value.trim() === "") {
+      setSuggestions([]);
+    } else {
+      const filtered = products
+        .filter((p) => p.name?.toLowerCase().includes(value.toLowerCase()))
+        .slice(0, 5);
+      setSuggestions(filtered);
+    }
+  };
+
+  const handleSuggestionClick = (name) => {
+    setSearchTerm(name);
+    setSuggestions([]);
   };
 
   // Filtering logic
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = !searchTerm || 
-      product.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      !searchTerm || product.name?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const category = product.category || "All";
     const matchesCategory = selectedCategory === "All" || category === selectedCategory;
@@ -248,9 +249,15 @@ const Products = () => {
     return matchesSearch && matchesCategory && matchesPrice;
   });
 
-  if (loading) return <p className="text-center mt-10">Loading products...</p>;
+  // Loader
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <HashLoader color="#2563eb" size={80} speedMultiplier={1.2} />
+      </div>
+    );
+  }
 
-  // Rest of your JSX remains the same, but use filteredProducts instead of products
   return (
     <div className="bg-gray-50 min-h-screen flex">
       {/* Sidebar Filter */}
@@ -292,30 +299,42 @@ const Products = () => {
 
       {/* Main Products Section */}
       <main className="flex-1 p-6">
-        {/* Your existing header and search bar JSX */}
         <div className="text-center mb-8">
           <h2 className="text-2xl font-semibold tracking-wide">Available Products</h2>
           <p className="text-gray-500">Find the perfect rental for you</p>
         </div>
 
-        <div className="mb-8 flex justify-center">
+        {/* Search with Suggestions */}
+        <div className="mb-8 flex flex-col items-center relative">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
             className="w-full max-w-xl px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
+          {suggestions.length > 0 && (
+            <ul className="absolute top-full mt-1 w-full max-w-xl bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              {suggestions.map((s) => (
+                <li
+                  key={s._id}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleSuggestionClick(s.name)}
+                >
+                  {s.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {/* Products Grid - Now using filteredProducts */}
+        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <div
               key={product._id}
               className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
             >
-              {/* Product Image */}
               {product.images && product.images.length > 0 ? (
                 <img
                   src={product.images[0]}
@@ -328,7 +347,6 @@ const Products = () => {
                 </div>
               )}
 
-              {/* Card Content */}
               <div className="p-4 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-2">
                   <h2 className="text-lg font-semibold">{product.name}</h2>

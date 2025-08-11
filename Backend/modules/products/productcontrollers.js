@@ -249,5 +249,34 @@ const deleteFromCart = async (productId) => {
 };
 
 
+const deleteFromCart2 = async (req, res) => {
+  const { email } = req.params;
+  const { productId } = req.body;
 
-module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail,deleteFromCart };
+  if (!email || !productId) {
+    return res.status(400).json({ message: 'Missing email or productId' });
+  }
+
+  try {
+    const db = getDB();
+    const productObjectId = new ObjectId(productId);
+
+    // Remove item from cart array
+    const result = await db.collection('carts').updateOne(
+      { email: email },
+      { $pull: { items: { productId: productObjectId } }, $set: { updatedAt: new Date() } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: 'Product not found in cart' });
+    }
+
+    res.status(200).json({ message: 'Product removed from cart successfully' });
+  } catch (error) {
+    console.error('Error deleting from cart:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
+module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail,deleteFromCart ,deleteFromCart2 };

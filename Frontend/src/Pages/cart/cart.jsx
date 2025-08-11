@@ -22,7 +22,7 @@ const Cart = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5500/api/cart/${user.email}`);
+        const response = await axios.get(`https://rental-management-20jo.onrender.com/api/cart/${user.email}`);
         setCartItems(response.data);
         setLoading(false);
       } catch (error) {
@@ -35,7 +35,7 @@ const Cart = () => {
   }, [user?.email]);
 
   const handleDeleteItem = async (productId) => {
-    if (!user?.email) return;
+  if (!user?.email) return;
 
     try {
       await axios.delete(`http://localhost:5500/api/cartdelete/${user.email}/${productId}`);
@@ -46,6 +46,18 @@ const Cart = () => {
       toast.error('Failed to remove item from cart');
     }
   };
+  try {
+    await axios.delete(`https://rental-management-20jo.onrender.com/api/cart/${user.email}`, {
+      data: { productId }
+    });
+
+    setCartItems(prevItems => prevItems.filter(item => item.productId !== productId));
+    toast.success('Item removed from cart successfully');
+  } catch (error) {
+    console.error('Failed to delete item:', error);
+    toast.error(error.response?.data?.message || 'Failed to remove item from cart');
+  }
+};
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);

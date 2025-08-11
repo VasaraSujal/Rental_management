@@ -61,12 +61,14 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center gap-6">
-            <li><Link to="/products" className="hover:text-blue-600">Product</Link></li>
-            <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
-            <li><Link to="/rental-products" className="hover:text-blue-600">Rental Product</Link></li>
-          </ul>
+
+                    {/* Desktop Menu */}
+                    <ul className="hidden md:flex items-center gap-6">
+                        <li><Link to="/products" className="hover:text-blue-600">Product</Link></li>
+                        <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
+                        <li><Link to="/rental-products" className="hover:text-blue-600">Rental Product</Link></li>
+                    </ul>
+
         </div>
 
         {/* Search Bar (desktop) */}
@@ -116,7 +118,7 @@ const Navbar = () => {
               {profileOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden z-100">
                   <Link
-                    to="/profile"
+                    to="/profile/:email"
                     className="block px-4 py-2 hover:bg-gray-100"
                     onClick={() => setProfileOpen(false)}
                   >

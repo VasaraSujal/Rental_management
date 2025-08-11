@@ -5,49 +5,67 @@ const allProducts = [
     id: 1,
     img: "https://via.placeholder.com/400x500?text=Luxury+Car",
     title: "Luxury Car - BMW 5 Series",
+    description:
+      "Luxury BMW 5 Series sedan, perfect for weddings, events, or long drives.",
     price: 2500,
     category: "Cars",
     duration: "Per Day",
+    available: 2,
   },
   {
     id: 2,
     img: "https://via.placeholder.com/400x500?text=Camera",
     title: "Canon DSLR Camera",
+    description:
+      "Professional DSLR camera with multiple lenses, great for photography.",
     price: 800,
     category: "Electronics",
     duration: "Per Day",
+    available: 4,
   },
   {
     id: 3,
     img: "https://via.placeholder.com/400x500?text=Trekking+Kit",
     title: "Full Trekking Gear Set",
+    description:
+      "Complete trekking set with tent, sleeping bag, cooking kit, and more.",
     price: 500,
     category: "Sports",
     duration: "Per Day",
+    available: 5,
   },
   {
     id: 4,
     img: "https://via.placeholder.com/400x500?text=Macbook+Pro",
     title: "MacBook Pro M1",
+    description:
+      "High-performance MacBook Pro M1 for work, editing, and design.",
     price: 1500,
     category: "Electronics",
     duration: "Per Day",
+    available: 3,
   },
   {
     id: 5,
     img: "https://via.placeholder.com/400x500?text=Wedding+Dress",
     title: "Designer Wedding Dress",
+    description:
+      "Elegant designer wedding dress for your special day.",
     price: 2000,
     category: "Fashion",
     duration: "Per Day",
+    available: 1,
   },
   {
     id: 6,
     img: "https://via.placeholder.com/400x500?text=Road+Bike",
     title: "Professional Road Bike",
+    description:
+      "Lightweight road bike designed for speed and comfort.",
     price: 700,
     category: "Sports",
     duration: "Per Day",
+    available: 6,
   },
 ];
 
@@ -111,7 +129,7 @@ const Products = () => {
       <main className="flex-1 p-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold tracking-wide">All Products</h2>
+          <h2 className="text-2xl font-semibold tracking-wide">Available Products</h2>
           <p className="text-gray-500">Find the perfect rental for you</p>
         </div>
 
@@ -120,21 +138,47 @@ const Products = () => {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition p-3 flex flex-col"
+              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
             >
+              {/* Product Image */}
               <img
                 src={product.img}
                 alt={product.title}
-                className="w-full h-[350px] object-cover rounded-md"
+                className="h-48 w-full object-cover"
               />
-              <div className="flex justify-between items-center mt-4">
-                <div>
-                  <h3 className="text-lg font-medium">{product.title}</h3>
-                  <p className="text-sm text-gray-500">{product.duration}</p>
+
+              {/* Card Content */}
+              <div className="p-4 flex-1 flex flex-col">
+                {/* Title & Category */}
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-lg font-semibold">{product.title}</h2>
+                  <span className="bg-blue-100 text-blue-600 text-xs font-medium px-2 py-1 rounded-full">
+                    {product.category}
+                  </span>
                 </div>
-                <span className="text-blue-600 font-semibold">
-                  ₹{product.price}
-                </span>
+
+                {/* Description */}
+                <p className="text-sm text-gray-500 mb-3 flex-1">
+                  {product.description}
+                </p>
+
+                {/* Availability */}
+                <p className="text-sm text-gray-700 mb-3">
+                  Available: {product.available} items
+                </p>
+
+                {/* Price & Add to Cart */}
+                <div className="flex items-center justify-between">
+                  <select className="border rounded px-2 py-1 text-sm">
+                    <option>{product.duration}</option>
+                    <option>Per hour</option>
+                  </select>
+                  <span className="text-lg font-bold">₹{product.price}</span>
+                </div>
+
+                <button className="mt-4 bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}

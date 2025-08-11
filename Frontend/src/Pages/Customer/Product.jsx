@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { HashLoader } from "react-spinners";
 
 // Categories (from your backend or frontend list)
 const categories = ["All", "Cars", "Electronics", "Sports", "Fashion", "Real Estate", "Gym", "Cycling", "Projectors"];
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -10,12 +12,36 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState(50000); // Max price filter
   const [loading, setLoading] = useState(true);
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value.trim() === "") {
+      setSuggestions([]);
+    } else {
+      const filtered = products
+        .filter((p) =>
+          p.name?.toLowerCase().includes(value.toLowerCase())
+        )
+        .slice(0, 5);
+      setSuggestions(filtered);
+    }
+  };
+
+  const handleSuggestionClick = (name) => {
+    setSearchTerm(name);
+    setSuggestions([]);
+  };
 
   // Fetch products from backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5500/api/products");
+        const res = await axios.get(
+          "https://rental-management-20jo.onrender.com/api/products"
+        );
         setProducts(res.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -25,6 +51,12 @@ const Products = () => {
     };
     fetchProducts();
   }, []);
+
+
+  // Filter products by search term
+  const searchedProducts = products.filter((product) =>
+    product.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // Filtering logic: apply search, category, and price
   const filteredProducts = products.filter((product) => {
@@ -43,14 +75,24 @@ const Products = () => {
     return matchesSearch && matchesCategory && matchesPrice;
   });
 
+
+  // Single Loader Check
   if (loading) {
-    return <p className="text-center mt-10">Loading products...</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <HashLoader color="black" size={80} />
+      </div>
+    );
   }
 
   return (
     <div className="bg-gray-50 min-h-screen flex">
       {/* Sidebar Filter */}
+
+      <aside className="w-50 bg-white p-6 hidden md:block">
+
       <aside className="w-60 bg-white shadow-md p-6 hidden md:block">
+
         <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
         {/* Category Filter */}
@@ -75,6 +117,7 @@ const Products = () => {
         </div>
 
         {/* Price Range Filter */}
+
         <div>
           <h3 className="font-medium mb-2">Max Price (₹)</h3>
           <input
@@ -99,18 +142,69 @@ const Products = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="mb-8 flex justify-center">
+        <div className="mb-8 flex flex-col items-center relative">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
             className="w-full max-w-xl px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
+
+          {suggestions.length > 0 && (
+            <ul className="absolute top-full mt-1 w-full max-w-xl bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              {suggestions.map((s) => (
+                <li
+                  key={s._id}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleSuggestionClick(s.name)}
+                >
+                  {s.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {searchedProducts.map((product) => (
+            <div
+              key={product._id}
+              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+            >
+              {product.images && product.images.length > 0 && (
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="h-48 w-full object-cover"
+                />
+              )}
+
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-lg font-semibold">{product.name}</h2>
+                  <span className="bg-blue-100 text-blue-600 text-xs font-medium px-2 py-1 rounded-full">
+                    {product.category}
+                  </span>
+                </div>
+
+                <p className="text-sm text-gray-500 mb-3 flex-1">
+                  {product.description}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-bold">
+                    ₹{product.price || product.pricepermonth}
+                  </span>
+                  <span className="text-sm text-gray-600">Per Month</span>
+                </div>
+
+                <button className="mt-4 bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
+                  Add to Cart
+                </button>
+
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <div
@@ -157,6 +251,7 @@ const Products = () => {
                     Add to Cart
                   </button>
                 </div>
+
               </div>
             ))
           ) : (

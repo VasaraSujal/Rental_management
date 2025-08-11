@@ -1,30 +1,38 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./Pages/Redux/authstore";  // adjust path if needed
+
 import Navbar from "./Components/Navbar";
 import CuHome from "./Pages/Customer/CuHome";
 import Footer from "./Components/Footer";
 import Products from "./Pages/Customer/Product";
+
 import Contect from './Pages/Customer/Contact'
 
+
 function App() {
-    const [loginOpen, setLoginOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+
   return (
-    <BrowserRouter>
-      {/* Navbar is always visible */}
-      <Navbar />
+    <Provider store={store}>
+      <BrowserRouter>
+        {/* Navbar is always visible */}
+        <Navbar />
 
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={<CuHome />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/contact" element={<Contect />} />
 
-      </Routes>
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<CuHome />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
 
-      {/* Footer is always visible */}
-      <Footer />
-    </BrowserRouter>
+        {/* Footer is always visible */}
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

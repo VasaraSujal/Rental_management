@@ -16,6 +16,7 @@ const addUser = async (req, res) => {
       propertiesRented
     } = req.body;
 
+    console.log('Received data:', req.body);
     // Basic validation
     if (!username || !email || !password || !location || !mobile || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
@@ -94,6 +95,7 @@ const userprofile  = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
 const updateUserProfile = async (req, res) => {
   try {
     const db = getDB();

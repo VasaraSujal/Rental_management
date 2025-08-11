@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const allProducts = [
   {
     id: 1,
-    img: "https://via.placeholder.com/400x500?text=Luxury+Car",
+    img: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=400&q=90", // BMW 5 Series luxury car, side view
     title: "Luxury Car - BMW 5 Series",
     description:
       "Luxury BMW 5 Series sedan, perfect for weddings, events, or long drives.",
@@ -14,7 +14,7 @@ const allProducts = [
   },
   {
     id: 2,
-    img: "https://via.placeholder.com/400x500?text=Camera",
+    img: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=90", // DSLR camera on wooden table
     title: "Canon DSLR Camera",
     description:
       "Professional DSLR camera with multiple lenses, great for photography.",
@@ -25,7 +25,7 @@ const allProducts = [
   },
   {
     id: 3,
-    img: "https://via.placeholder.com/400x500?text=Trekking+Kit",
+    img: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=400&q=90", // Camping and trekking gear outdoors
     title: "Full Trekking Gear Set",
     description:
       "Complete trekking set with tent, sleeping bag, cooking kit, and more.",
@@ -36,7 +36,7 @@ const allProducts = [
   },
   {
     id: 4,
-    img: "https://via.placeholder.com/400x500?text=Macbook+Pro",
+    img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=90", // MacBook Pro on desk with coffee
     title: "MacBook Pro M1",
     description:
       "High-performance MacBook Pro M1 for work, editing, and design.",
@@ -47,7 +47,7 @@ const allProducts = [
   },
   {
     id: 5,
-    img: "https://via.placeholder.com/400x500?text=Wedding+Dress",
+    img: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=90", // Elegant wedding dress on mannequin
     title: "Designer Wedding Dress",
     description:
       "Elegant designer wedding dress for your special day.",
@@ -58,7 +58,7 @@ const allProducts = [
   },
   {
     id: 6,
-    img: "https://via.placeholder.com/400x500?text=Road+Bike",
+    img: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=400&q=90", // Road bike on city street
     title: "Professional Road Bike",
     description:
       "Lightweight road bike designed for speed and comfort.",
@@ -68,6 +68,8 @@ const allProducts = [
     available: 6,
   },
 ];
+
+
 
 const categories = ["All", "Cars", "Electronics", "Sports", "Fashion"];
 
@@ -85,7 +87,7 @@ const Products = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex">
       {/* Sidebar Filter */}
-      <aside className="w-64 bg-white shadow-md p-6 hidden md:block">
+      <aside className="w-50 bg-white shadow-md p-6 hidden md:block">
         <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
         {/* Category Filter */}

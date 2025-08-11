@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapPin, Phone, Mail } from "lucide-react"; // Lucide icons
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -7,23 +7,44 @@ const ContactPage = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formspree.io/f/manbagdw", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (response.ok) {
+        alert("Message sent! 📧 Thanks for reaching out. I'll get back to you soon.");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert("There was a problem sending your message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("An error occurred, but we’ll get back to you soon!");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12 px-4">
       {/* Main Contact Card */}
       <div className="w-full max-w-6xl overflow-hidden flex flex-col md:flex-row">
-        
         {/* Left - Contact Form */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Contact Us</h2>
@@ -61,9 +82,10 @@ const ContactPage = () => {
             ></textarea>
             <button
               type="submit"
+              disabled={isSubmitting}
               className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg text-lg font-medium"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
@@ -81,7 +103,7 @@ const ContactPage = () => {
       </div>
 
       {/* Company Info Section */}
-      <div className=" mt-8 w-full  grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 text-center">
+      <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 text-center">
         <div className="flex flex-col items-center">
           <MapPin className="w-6 h-6 text-blue-600 mb-2" />
           <h4 className="text-lg font-semibold text-gray-800">Location</h4>
@@ -95,7 +117,7 @@ const ContactPage = () => {
         <div className="flex flex-col items-center">
           <Mail className="w-6 h-6 text-blue-600 mb-2" />
           <h4 className="text-lg font-semibold text-gray-800">Email</h4>
-          <p className="text-gray-500 mt-1">support@rmrentals.com</p>
+          <p className="text-gray-500 mt-1">jatinrajwani@gmail.com</p>
         </div>
       </div>
     </div>

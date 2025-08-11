@@ -227,10 +227,10 @@ const Products = () => {
     try {
       const response = await axios.post("http://localhost:5500/api/addincart", cartData);
       console.log("Server response:", response.data);
-      alert(Added ${product.name} to cart!);
+      alert(`Added ${product.name} to cart!`);
     } catch (error) {
       console.error("Add to cart failed:", error.response?.data || error);
-      alert(Failed to add product to cart: ${error.response?.data?.message || error.message});
+      alert(`Failed to add product to cart: ${error.response?.data?.message || error.message}`);
     }
   };
 

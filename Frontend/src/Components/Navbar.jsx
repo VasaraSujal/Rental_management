@@ -7,23 +7,24 @@ import LoginPopup from "../Components/Login_signup/Login";
 import SignUpPopup from "../Components/Login_signup/Signup";
 
 const Navbar = () => {
-      const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
-    // Popup states
-    const [showLogin, setShowLogin] = useState(false);
-    const [showSignUp, setShowSignUp] = useState(false);
+  // Popup states
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
-    // Profile dropdown
-    const [profileOpen, setProfileOpen] = useState(false);
+  // Profile dropdown
+  const [profileOpen, setProfileOpen] = useState(false);
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
-    const toggleSearch = () => setSearchOpen(!searchOpen);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleSearch = () => setSearchOpen(!searchOpen);
 
+
+    
     return (
         <>
             <nav className="w-full bg-white text-black flex items-center justify-between px-4 py-2 shadow relative">

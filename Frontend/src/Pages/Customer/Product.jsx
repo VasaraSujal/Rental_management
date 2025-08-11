@@ -87,7 +87,7 @@ const Products = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex">
       {/* Sidebar Filter */}
-      <aside className="w-64 bg-white shadow-md p-6 hidden md:block">
+      <aside className="w-50 bg-white shadow-md p-6 hidden md:block">
         <h2 className="text-lg font-semibold mb-4">Filters</h2>
 
         {/* Category Filter */}

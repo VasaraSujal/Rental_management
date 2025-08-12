@@ -6,17 +6,17 @@ Customers can **browse, book, and pay** for rental items securely, while admins 
 ---
 
 ## 📌 Table of Contents
-- [✨ Features](#-features)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [📦 Installation](#-installation)
-- [▶️ Running the Project](#️-running-the-project)
-- [💳 Stripe Payment Flow](#-stripe-payment-flow)
-- [📧 Nodemailer Notifications](#-nodemailer-email-notifications)
-- [📂 Project Structure](#-project-structure)
-- [🔒 Security Measures](#-security-measures)
-- [🚀 Future Enhancements](#-future-enhancements)
-- [📜 License](#-license)
-- [👨‍💻 Contributors](#-contributors)
+- Features  
+- Tech Stack  
+- Installation  
+- Running the Project  
+- Stripe Payment Flow  
+- Nodemailer Notifications  
+- Project Structure  
+- Security Measures  
+- Future Enhancements  
+- License  
+- Contributors  
 
 ---
 

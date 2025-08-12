@@ -1,62 +1,73 @@
-# 🏠 Rental Management System
+# 🏠✨ Rental Management System
 
-A **full-stack web application** to streamline the entire rental process.  
-It allows customers to browse and rent products, manage bookings, make secure payments, and receive real-time email notifications.  
-Admins can manage listings, track reservations, and communicate with customers easily.
+A **Full-Stack Web Application** to simplify and digitize the rental process.  
+Customers can **browse, book, and pay** for rental items securely, while admins can **manage inventory, bookings, and notifications** – all in one place.
+
+---
+
+## 📌 Table of Contents
+- [✨ Features](#-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📦 Installation](#-installation)
+- [▶️ Running the Project](#️-running-the-project)
+- [💳 Stripe Payment Flow](#-stripe-payment-flow)
+- [📧 Nodemailer Notifications](#-nodemailer-email-notifications)
+- [📂 Project Structure](#-project-structure)
+- [🔒 Security Measures](#-security-measures)
+- [🚀 Future Enhancements](#-future-enhancements)
+- [📜 License](#-license)
+- [👨‍💻 Contributors](#-contributors)
 
 ---
 
 ## ✨ Features
 
-### 🔹 Customer Side
-- Browse and search available rental products.
-- Reserve items for specific dates and time frames.
-- Multiple rental durations: hourly, daily, weekly, monthly, or yearly.
-- View product details with pricing, images, and availability.
-- Add to cart and checkout securely with **Stripe Payment Gateway**.
-- Receive booking confirmation and updates via **email notifications**.
+### 👤 **Customer Features**
+- 🔍 **Browse Products** – Search & filter rental items.
+- 📅 **Book for Specific Dates** – Hourly, daily, weekly, monthly, yearly.
+- 🛒 **Add to Cart** – Simple, clean, and responsive design.
+- 💳 **Secure Checkout** – Powered by **Stripe Payment Gateway**.
+- 📩 **Email Confirmation** – Booking updates via **Nodemailer**.
 
-### 🔹 Admin Side
-- Add, edit, and delete products.
-- Set different pricing for different rental durations.
-- Manage customer reservations and track inventory.
-- Receive booking requests and updates via **Nodemailer**.
-- Dashboard for tracking revenue and customer activity.
+### 🛠️ **Admin Features**
+- 📦 Add, Edit, Delete rental products.
+- 💰 Set different pricing for multiple durations.
+- 📊 View bookings, manage availability.
+- 📧 Receive notifications for new bookings & status updates.
 
-### 🔹 Core Functionalities
-- **Stripe Integration** – Secure online payment processing.
-- **Nodemailer Integration** – Email notifications between admin and customers.
-- Real-time product availability tracking.
-- Role-based authentication (Admin & Customer).
-- Responsive and modern UI for desktop & mobile.
+### 🔗 **Core Functionalities**
+- 💳 **Stripe Integration** – PCI-compliant payments.
+- 📩 **Nodemailer Integration** – Admin & user email notifications.
+- 🔐 **JWT Auth** – Secure login for both roles.
+- 📱 Fully responsive modern UI.
 
 ---
 
 ## 🛠️ Tech Stack
 
 **Frontend:**
-- React.js  
-- Tailwind CSS  
-- Axios (API calls)  
-- React Router
+- ⚛️ React.js  
+- 🎨 Tailwind CSS  
+- 🔄 Axios  
+- 🚏 React Router  
 
 **Backend:**
-- Node.js  
-- Express.js  
-- MongoDB (Mongoose)  
-- Stripe API (Payments)  
-- Nodemailer (Email notifications)  
+- 🟢 Node.js  
+- 🚀 Express.js  
+- 🗄 MongoDB + Mongoose  
+- 💳 Stripe API  
+- 📩 Nodemailer  
 
 **Other Tools:**
-- JWT Authentication  
-- bcrypt.js (Password hashing)  
-- Dotenv (Environment variables)  
+- 🔑 JWT Authentication  
+- 🔒 bcrypt.js  
+- ⚙️ dotenv  
 
 ---
 
 ## 📦 Installation
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/JatinRajvani/Rental_management.git
 cd Rental_management

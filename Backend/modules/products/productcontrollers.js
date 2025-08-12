@@ -251,6 +251,7 @@ const deleteFromCart = async (productId) => {
 const productbyitsid = async (req, res) => {
   const { id } = req.params;
 
+<<<<<<< HEAD
   if (!id) {
     return res.status(400).json({ message: 'Missing product ID' });
   }
@@ -266,8 +267,40 @@ const productbyitsid = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     console.error('Error fetching product by ID:', error);
+=======
+const deleteFromCart2 = async (req, res) => {
+  const { email } = req.params;
+  const { productId } = req.body;
+
+  if (!email || !productId) {
+    return res.status(400).json({ message: 'Missing email or productId' });
+  }
+
+  try {
+    const db = getDB();
+    const productObjectId = new ObjectId(productId);
+
+    // Remove item from cart array
+    const result = await db.collection('carts').updateOne(
+      { email: email },
+      { $pull: { items: { productId: productObjectId } }, $set: { updatedAt: new Date() } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: 'Product not found in cart' });
+    }
+
+    res.status(200).json({ message: 'Product removed from cart successfully' });
+  } catch (error) {
+    console.error('Error deleting from cart:', error);
+>>>>>>> 6feced58c8e1fa6a10568ae8b67f98e02d5a90ef
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
+<<<<<<< HEAD
 module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail, deleteFromCart, productbyitsid };
+=======
+
+module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail,deleteFromCart ,deleteFromCart2 };
+>>>>>>> 6feced58c8e1fa6a10568ae8b67f98e02d5a90ef

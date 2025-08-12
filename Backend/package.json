@@ -19,8 +19,13 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.3",
+<<<<<<< HEAD
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.10"
+=======
+    "nodemon": "^3.1.10",
+    "stripe": "^18.4.0"
+>>>>>>> 6feced58c8e1fa6a10568ae8b67f98e02d5a90ef
   },
   "start": "node index.js"
 }

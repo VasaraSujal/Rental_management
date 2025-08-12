@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { TrashIcon } from '@heroicons/react/24/outline'; // Add this import
-import { toast } from 'react-toastify'; // Import toast
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -31,21 +34,91 @@ const Cart = () => {
     fetchCartItems();
   }, [user?.email]);
 
-  const handleDeleteItem = async (productId) => {
-    if (!user?.email) return;
+const handleDeleteItem = async (productId) => {
+  if (!user?.email) return;
+
+  try {
+    await axios.delete(
+      `https://rental-management-20jo.onrender.com/api/cart/${user.email}`,
+      {
+        data: { productId }
+      }
+    );
+
+    // Remove deleted item from local state
+    setCartItems(prevItems => prevItems.filter(item => item.productId !== productId));
+    toast.success('Item removed from cart successfully');
+  } catch (error) {
+    console.error('Failed to delete item:', error);
+    toast.error(error.response?.data?.message || 'Failed to remove item from cart');
+  }
+};
+
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  // Convert INR to paise (smallest unit for INR in Stripe)
+  // 1 INR = 100 paise
+  const convertToPaise = (inrAmount) => {
+    return Math.round(inrAmount * 100);
+  };
+
+  const handleProceedToCheckout = async () => {
+    if (!user?.email) {
+      toast.error('Please login to proceed');
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
+    setCheckoutLoading(true);
 
     try {
-      // Modified DELETE request URL to include both email and productId in the path
-      await axios.delete(`http://localhost:5500/api/cartdelete/${user.email}/${productId}`);
-      
-      // Update local state to remove the item
-      setCartItems(prevItems => prevItems.filter(item => item.productId !== productId));
-      
-      // Add user feedback
-      toast.success('Item removed from cart successfully');
+      const totalInINR = calculateTotal();
+      const totalInPaise = convertToPaise(totalInINR);
+
+      // Create payment intent with INR currency
+      const response = await axios.post('http://localhost:5500/api/create-payment-intent', {
+        amount: totalInPaise,
+        currency: 'inr', // Use INR currency
+        metadata: {
+          userEmail: user.email,
+          itemCount: cartItems.length,
+          cartItems: JSON.stringify(cartItems.map(item => ({
+            productId: item.productId,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+          })))
+        }
+      });
+
+      // Store the client secret and order details for the checkout page
+      const checkoutData = {
+        clientSecret: response.data.clientSecret,
+        orderDetails: {
+          items: cartItems,
+          total: totalInINR,
+          userEmail: user.email
+        }
+      };
+
+      // Store in sessionStorage for the checkout page
+      sessionStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+
+      // Navigate to checkout page
+      navigate('/checkout');
+
     } catch (error) {
-      console.error('Failed to delete item:', error);
-      toast.error('Failed to remove item from cart');
+      console.error('Checkout error:', error);
+      toast.error('Failed to initialize checkout. Please try again.');
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
@@ -63,7 +136,10 @@ const Cart = () => {
         <div className="text-center p-8 bg-red-50 rounded-lg">
           <p className="text-red-600">{error}</p>
           {!user && (
-            <button className="mt-4 bg-gray-900 text-white px-6 py-2 rounded-lg">
+            <button 
+              className="mt-4 bg-gray-900 text-white px-6 py-2 rounded-lg"
+              onClick={() => navigate('/login')}
+            >
               Login to View Cart
             </button>
           )}
@@ -77,15 +153,17 @@ const Cart = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-semibold mb-4">Your Cart is Empty</h2>
-          <p className="text-gray-600">Start adding some items to your cart!</p>
+          <p className="text-gray-600 mb-6">Start adding some items to your cart!</p>
+          <button 
+            className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition"
+            onClick={() => navigate('/products')}
+          >
+            Continue Shopping
+          </button>
         </div>
       </div>
     );
   }
-
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -137,13 +215,39 @@ const Cart = () => {
                 <span>Items ({cartItems.length})</span>
                 <span>₹{calculateTotal()}</span>
               </div>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>Tax</span>
+                <span>Included</span>
+              </div>
+              <hr className="my-2" />
               <div className="flex justify-between font-semibold">
                 <span>Total Amount</span>
                 <span>₹{calculateTotal()}</span>
               </div>
             </div>
-            <button className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
-              Proceed to Checkout
+            <button 
+              onClick={handleProceedToCheckout}
+              disabled={checkoutLoading || cartItems.length === 0}
+              className="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {checkoutLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></div>
+                  Processing...
+                </>
+              ) : (
+                'Proceed to Checkout'
+              )}
+            </button>
+            <button 
+              onClick={() => navigate('/products')}
+              className="w-full mt-2 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition"
+            >
+              Continue Shopping
             </button>
           </div>
         </div>

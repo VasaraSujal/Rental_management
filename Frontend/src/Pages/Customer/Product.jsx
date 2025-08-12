@@ -150,6 +150,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "All",
@@ -164,6 +165,7 @@ const categories = [
 ];
 
 const Products = () => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -234,6 +236,13 @@ const Products = () => {
     }
   };
 
+  // Handle product click
+  const handleProductClick = (product, e) => {
+    // Prevent triggering when clicking the Add to Cart button
+    if (e.target.tagName === 'BUTTON') return;
+    navigate(`/product/${product._id}`);
+  };
+
   // Filtering logic
   const filteredProducts = products.filter((product) => {
     const matchesSearch = !searchTerm || 
@@ -250,7 +259,6 @@ const Products = () => {
 
   if (loading) return <p className="text-center mt-10">Loading products...</p>;
 
-  // Rest of your JSX remains the same, but use filteredProducts instead of products
   return (
     <div className="bg-gray-50 min-h-screen flex">
       {/* Sidebar Filter */}
@@ -313,7 +321,8 @@ const Products = () => {
           {filteredProducts.map((product) => (
             <div
               key={product._id}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+              onClick={(e) => handleProductClick(product, e)}
+              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col cursor-pointer"
             >
               {/* Product Image */}
               {product.images && product.images.length > 0 ? (

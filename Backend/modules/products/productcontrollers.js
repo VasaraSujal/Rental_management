@@ -238,7 +238,7 @@ const getcartproductbyemail = async (req, res) => {
 // Example frontend usage
 const deleteFromCart = async (productId) => {
   try {
-    await axios.delete(`http://localhost:5500/api/cart/${user.email}`, {
+    await axios.delete(`http://localhost:5500/api/cart/${user.email}/${productId}`, {
       data: { productId }
     });
     // Refresh cart after deletion
@@ -248,6 +248,26 @@ const deleteFromCart = async (productId) => {
   }
 };
 
+const productbyitsid = async (req, res) => {
+  const { id } = req.params;
 
+  if (!id) {
+    return res.status(400).json({ message: 'Missing product ID' });
+  }
 
-module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail,deleteFromCart };
+  try {
+    const db = getDB();
+    const product = await db.collection('all_products').findOne({ _id: new ObjectId(id) });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+module.exports = { addproduct, producttransaction, getAllProducts, addincart, getcartproductbyemail, deleteFromCart, productbyitsid };

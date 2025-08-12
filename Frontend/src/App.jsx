@@ -11,8 +11,9 @@ import Products from "./Pages/Customer/Product";
 import Cart from './Pages/cart/cart'
 import Contact from './Pages/Customer/Contact'
 import UserProfileSection from "./Pages/Customer/UserProfileSection";
+import ProductDetailPage from './Components/productpage/'
 import { ToastContainer } from "react-toastify";
-
+import BookingResponsePage from './pages/BookingResponsePage';
 
 function App() {
   const [loginOpen, setLoginOpen] = useState(false);
@@ -31,6 +32,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile/:email" element={<UserProfileSection />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/booking/:action/:bookingId" element={<BookingResponsePage />} />
         </Routes>
 
         {/* Footer is always visible */}
